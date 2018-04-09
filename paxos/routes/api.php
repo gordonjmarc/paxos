@@ -18,8 +18,10 @@ use Illuminate\Http\Request;
 //});a
 //
 
-Route::get('/message/{id}', 'MessageController@decode');
-Route::post('/messages', 'MessageController@encode');
+Route::post('messages',  'MessageController@encode');
+
+
+Route::get('messages/{message}', 'MessageController@decode');
 
 /*
 Route::get('test', function () {

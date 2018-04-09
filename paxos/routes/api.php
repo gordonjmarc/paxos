@@ -17,5 +17,14 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});a
 //
-Route::get('message/{id}', 'MessageController@show');
-Route::post('messages', 'MessageController@store');
+
+Route::get('/message/{id}', 'MessageController@decode');
+Route::post('/messages', 'MessageController@encode');
+
+/*
+Route::get('test', function () {
+    return response('Test API', 200)
+                  ->header('Content-Type', 'application/json');
+});
+
+*/

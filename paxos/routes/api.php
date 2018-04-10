@@ -18,11 +18,10 @@ use Illuminate\Http\Request;
 //});a
 //
 
-Route::post('messages',  'MessageController@encode');
-
-
-Route::get('messages/{message}', 'MessageController@decode');
-
+Route::group(['middleware' => ['api']], function () {
+	Route::post('messages',  'MessageController@encode');
+	Route::get('messages/{message}', 'MessageController@decode');
+});
 /*
 Route::get('test', function () {
     return response('Test API', 200)

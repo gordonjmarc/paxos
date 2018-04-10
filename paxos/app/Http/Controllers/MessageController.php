@@ -41,7 +41,7 @@ class MessageController extends Controller
     	$sessionValue = session($message);
     	
     	//var_dump($message);
-    	//var_dump($sessionValue);
+    	var_dump($sessionValue);
    		//var_dump($session($message));
 
     	if(empty($sessionValue))

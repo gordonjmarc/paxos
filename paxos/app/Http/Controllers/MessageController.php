@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+
+
 class MessageController extends Controller
 {
 
@@ -19,13 +21,24 @@ class MessageController extends Controller
 
 		$message = $data['message'];
 		$messageEncoded = hash('sha256', $message);
-		
-		session([$messageEncoded => $message]);
 
-		$sessionValue = session($messageEncoded);
 
-		var_dump($sessionValue);
+       try 
+       {
+            $redis = \Redis::connection();
+  
+           // echo "Successfully connected to Redis";
 
+            $redis->set($messageEncoded, $message);
+
+            $value = $redis->get('message');
+        
+        }
+        catch (Exception $e) 
+        {
+            echo "Couldn't connected to Redis";
+            echo $e->getMessage();
+        }
 
 
     	$returnData = array("digest" => $messageEncoded);
@@ -37,12 +50,25 @@ class MessageController extends Controller
 
     public function decode(Request $request, $message)
     {
+        $sessionValue = null;
+
+        try 
+       {
+            $redis = \Redis::connection();
   
-    	$sessionValue = session($message);
-    	
-    	//var_dump($message);
-    	var_dump($sessionValue);
-   		//var_dump($session($message));
+           // echo "Successfully connected to Redis";
+
+            $value = $redis->get($message);
+        
+            $sessionValue = $value;
+
+
+        }
+        catch (Exception $e) 
+        {
+            echo "Couldn't connected to Redis";
+            echo $e->getMessage();
+        }
 
     	if(empty($sessionValue))
     	{
@@ -50,7 +76,7 @@ class MessageController extends Controller
 			return response()->json($returnData);
     	}
 
-	  	$returnData = array("digest" => "nothing");
+	  	$returnData = array("digest" => $sessionValue);
 
 
     	return response()->json($returnData);

@@ -22,5 +22,8 @@ Homestead.json
 # Rocketeer PHP task runner and deployment package. https://github.com/rocketeers/rocketeer
 .rocketeer/
 
+paxos/server.crt
+paxos/server.csr
+paxos/server.key
 
 # End of https://www.gitignore.io/api/laravel

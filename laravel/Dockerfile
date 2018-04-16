@@ -14,9 +14,13 @@ RUN ./docker-ssl-cert.gen.sh
 
 ADD apache-config.conf /etc/apache2/sites-enabled/000-default.conf
 
+ADD localhost.crt /etc/apache2/localhost.crt
+ADD localhost.key /etc/apache2/localhost.key
+
 RUN chown -R www-data:www-data /var/www
 RUN usermod -u 1000 www-data && groupmod -g 1000 www-data
 
+RUN a2enmod rewrite
 RUN a2enmod ssl
 
 ENV APACHE_LOG_DIR /var/log/apache2

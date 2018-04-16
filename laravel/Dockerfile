@@ -12,7 +12,8 @@ RUN ./docker-ssl-cert.gen.sh
 
 #APACHE CONFIG
 
-ADD apache-config.conf /etc/apache2/sites-enabled/000-default.conf
+#ADD apache-config.conf /etc/apache2/sites-enabled/000-default.conf
+ADD apache-config-ssl.conf /etc/apache2/sites-enabled/000-default.conf
 
 ADD localhost.crt /etc/apache2/localhost.crt
 ADD localhost.key /etc/apache2/localhost.key
@@ -30,5 +31,6 @@ ENV APACHE_PID_FILE /var/run/apache2.pid
 EXPOSE 80
 EXPOSE 8181
 EXPOSE 443
+EXPOSE 5000
 
 CMD ["/bin/bash", "init.sh"]

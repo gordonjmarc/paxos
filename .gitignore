@@ -25,5 +25,9 @@ Homestead.json
 server.crt
 server.csr
 server.key
+localhost.crt
+localhost.csr
+localhost.key
+
 
 # End of https://www.gitignore.io/api/laravel

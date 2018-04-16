@@ -1,0 +1,7 @@
+version: '2'
+services:
+  paxos:
+    build:
+      context: ./laravel
+    ports:
+     - "5000:443"

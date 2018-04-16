@@ -8,7 +8,7 @@ docker build -t zzz .
 ```
 Run container like this:
 ```
-docker run -p 5000:443 zzz
+docker run --restart always -p 5000:443 zzz
 ```
 
 Example requests:
